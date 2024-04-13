@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAPID RESCUE First Aid</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        color: #000000;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        text-align: center;
+    }
+    .header {
+        background-color: #ff0000;
+        color: #ffffff;
+        padding: 20px;
+    }
+    .language-btn {
+        background-color: #ff0000;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        margin: 10px;
+        cursor: pointer;
+    }
+    .injury-link {
+        display: inline-block;
+        margin: 10px;
+        text-decoration: none;
+        color: #ff0000;
+        border: 2px solid #ff0000;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
+    .injury-link:hover {
+        background-color: #ff0000;
+        color: #ffffff;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1 id="header-text">RAPID RESCUE First Aid</h1>
+    </div>
+
+<!-- english -->
+<button onclick="redirectTo('https://www.youtube.com/')">english</button>
+
+<!-- telugu -->
+<button onclick="redirectTo('https://www.youtube.com/')">telugu</button>
+
+<!-- hindi  -->
+<button onclick="redirectTo('https://www.youtube.com/')">hindi</button>
+
+<script>
+// Function to redirect to the specified URL
+function redirectTo(url) {
+    window.location.href = url;
+}
+</script>
+
+
+    <div>
+        <h2 id="injury-select-text">Select Injury Type:</h2>
+   
+        <a class="injury-link" href="#" onclick="showInjuryVideo('leg')">Leg  fracture </a>
+        <a class="injury-link" href="#" onclick="showInjuryVideo('head')">Head Injury</a>
+        <a class="injury-link" href="#" onclick="showInjuryVideo('knee')">Knee Injury</a>
+        <a class="injury-link" href="#" onclick="showInjuryVideo('hand')">Hand Injury</a>
+
+    </div>
+
+
+
+
+
+
+
+    <div id="video-container" style="display: none;">
+        <h2 id="video-header-text">Injury First Aid Video:</h2>
+        <div id="video-player"></div>
+    </div>
+
+    <div>
+        <h2 id="contact-text">Contact:</h2>
+        <button onclick="callNumber(108)">Call 108</button>
+        <button onclick="callNumber(100)">Call 100</button>
+	
+
+    </div>
+</div>
+
+<script>
+    function changeLanguage(language) {
+        var languageTexts = {
+            'hindi': {
+                'header': 'त्वरित बचाव पहला उपचार',
+                'languageSelect': 'भाषा चुनें:',
+                'injurySelect': 'चोट प्रकार का चयन करें:',
+                'videoHeader': 'चोट पहली सहायता वीडियो:',
+                'contact': 'संपर्क:'
+            },
+            'english': {
+                'header': 'RAPID RESCUE First Aid',
+                'languageSelect': 'Select Language:',
+                'injurySelect': 'Select Injury Type:',
+                'videoHeader': 'Injury First Aid Video:',
+                'contact': 'Contact:'
+            },
+            'telugu': {
+                'header': 'వేగవంతమైన సహాయం',
+                'languageSelect': 'భాషను ఎంచుకోండి:',
+                'injurySelect': 'గాయం రకాన్ని ఎంచుకోండి:',
+                'videoHeader': 'గాయం మొదటి సేవల వీడియో:',
+                'contact': 'సంప్రదించండి:'
+            }
+        };
+
+        document.getElementById('header-text').innerText = languageTexts[language]['header'];
+        document.getElementById('language-select-text').innerText = languageTexts[language]['languageSelect'];
+        document.getElementById('injury-select-text').innerText = languageTexts[language]['injurySelect'];
+        document.getElementById('video-header-text').innerText = languageTexts[language]['videoHeader'];
+        document.getElementById('contact-text').innerText = languageTexts[language]['contact'];
+
+        // Update injury type texts
+        var injuryTexts = {
+            'hindi': {
+                'leg': 'पैर चोट',
+                'head': 'सिर चोट',
+                'knee': 'घुटने की चोट',
+                'hand': 'हाथ चोट'
+            },
+            'english': {
+                'leg': 'Leg Injury',
+                'head': 'Head Injury',
+                'knee': 'Knee Injury',
+                'hand': 'Hand Injury'
+            },
+            'telugu': {
+                'leg': 'కాలు రక్తస్రావం',
+                'head': 'తల గాయం',
+                'knee': 'మోకాలి గాయం',
+                'hand': 'చేతి గాయం'
+            }	
+        };
+
+        document.querySelectorAll('.injury-link').forEach(function(link) {
+            var injuryType = link.getAttribute('onclick').split("'")[1];
+            link.innerText = injuryTexts[language][injuryType];
+        });
+
+        alert('Language changed to ' + language);
+    }
+
+    function showInjuryVideo(injuryType) {
+        document.getElementById('video-container').style.display = 'block';
+        var videoPlayer = document.getElementById('video-player');
+        // You can replace the video source with actual video links for each injury type
+        videoPlayer.innerHTML = `<video width="400" controls>
+                                    <source src="video_links/${injuryType}_injury.mp4" type="video/mp4">
+                                    Your browser does not support HTML5 video.
+                                </video>`;
+    }
+
+    function callNumber(number) {
+        // You can implement call logic here
+        alert('Calling ' + number);
+    }
+
+</script>
+
+</script>
+
+</body>
+</html>
